@@ -9,4 +9,6 @@ spark.conf.set("spark.sql.shuffle.partition","5")
 
 
 
-spark.read.format("json").load("../data/flight-data/json/2015-summary.json").schema
+schema_d = spark.read.format("json").load(r"F:\SPARK_DEFINITIVE_PROJECTS\\data\Spark-The-Definitive-Guide\data\flight-data\json\2015-summary.json").schema
+
+print(schema_d)
