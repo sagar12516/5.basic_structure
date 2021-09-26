@@ -9,6 +9,7 @@ spark.conf.set("spark.sql.shuffle.partition","5")
 
 
 
-schema_d = spark.read.format("json").load(r"F:\SPARK_DEFINITIVE_PROJECTS\\data\Spark-The-Definitive-Guide\data\flight-data\json\2015-summary.json").schema
+df = spark.read.format("json").load(r"F:\SPARK_DEFINITIVE_PROJECTS\\data\Spark-The-Definitive-Guide\data\flight-data\json\2015-summary.json")
 
-print(schema_d)
+
+df.printSchema()
