@@ -1,6 +1,7 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import  *
-from pyspark.sql.types import StructField,StructType,StringType,LongType
+from pyspark.sql.types import StructField,StructType,StringType,LongType,IntegerType
+from pyspark.sql import Row
 
 spark = SparkSession.builder.appName("structured_operations")\
     .master("local[*]")\
@@ -34,4 +35,26 @@ df.columns
 
 df.first()
 
-# pg  : 70
+#  Creating the Rows
+
+myRow = Row("Hello",None,1,False)
+
+# print(myRow[0])
+
+df = spark.read.format("json").load(r"F:\SPARK_DEFINITIVE_PROJECTS\\data\Spark-The-Definitive-Guide\data\flight-data\json\2015-summary.json")
+
+df.createOrReplaceTempView("df_table")
+
+
+myManualSchema = StructType([
+StructField("some", StringType(), True),
+StructField("col", StringType(), True),
+StructField("names", LongType(), False)
+])
+
+myRow = Row("Hello", None, 1)
+myDf = spark.createDataFrame([myRow], myManualSchema)
+myDf.show()
+
+# pg : 72
+
